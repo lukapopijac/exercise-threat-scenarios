@@ -1,0 +1,73 @@
+.ThreatScenariosTable {
+	position: relative;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.ThreatScenariosTable .header {
+	background: #422;
+	color: #fff;
+	height: 40px;
+	font-size: 13px;
+	flex-shrink: 0;
+}
+
+.ThreatScenariosTable .header {
+	padding: 0 10px;
+	display: grid;
+	grid-template-columns: 1fr 1.7fr 1fr 1fr 70px 70px 70px 80px;
+	gap: 10px;
+	grid-gap: 10px;  /* for safari */
+	align-items: center;
+}
+
+.ThreatScenariosTable .header .title          { justify-self: start; }
+.ThreatScenariosTable .header .description    { justify-self: start; }
+.ThreatScenariosTable .header .related_asset  { justify-self: start; }
+.ThreatScenariosTable .header .classification { justify-self: start; }
+.ThreatScenariosTable .header .impact         { justify-self: center; }
+.ThreatScenariosTable .header .likelihood     { justify-self: center; }
+.ThreatScenariosTable .header .risk_level     { justify-self: center; }
+.ThreatScenariosTable .header .edit-delete    { justify-self: end; display: flex }
+
+.ThreatScenariosTable ul.list {
+	flex-grow: 1;
+	overflow: auto;
+	padding: 0;
+	margin: 0;
+	color: #211;
+	font-size: 13px;
+}
+
+.ThreatScenariosTable .footer {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 30px;
+}
+
+.ThreatScenariosTable .footer button {
+	margin-left: 15px;
+	border: none;
+	background: #d5d5d5;
+	width: 32px;
+	height: 32px;
+	font-size: 16px;
+	outline: none;
+	cursor: pointer;
+}
+
+.ThreatScenariosTable .footer button:hover {
+	background: #eee;
+}
+.ThreatScenariosTable .footer button:active {
+	background: #e2e2e2;
+}
+.ThreatScenariosTable .footer button[disabled] {
+	cursor: default;
+}
+.ThreatScenariosTable .footer button[disabled]:hover {
+	background: #d5d5d5;
+}

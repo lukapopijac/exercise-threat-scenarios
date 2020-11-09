@@ -1,0 +1,17 @@
+.App-header {
+	background: #224;
+	color: #ddd;
+	height: 60px;
+	padding: 30px;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.App .table-wrapper {
+	background: #f8f8f8;
+	border: 1px solid grey;
+	padding: 10px;
+	margin: 10px;
+}
