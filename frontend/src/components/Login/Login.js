@@ -1,7 +1,8 @@
 import React from 'react';
+import {AuthenticationDetails, CognitoUser} from 'amazon-cognito-identity-js';
 import './Login.css';
 import openModal from '../../common/open-modal.js';
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -21,20 +22,14 @@ export default class Login extends React.Component {
 		let formData = new FormData(this.form.current);
 		let {username, password} = Object.fromEntries(formData);
 
-		const poolData = {
-			UserPoolId: 'us-west-2_9rkRbB2Vn',
-			ClientId: '7q73kj26651bkg4t3peu4v3m4q'
-		};
-		const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-		const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+		const authenticationDetails = new AuthenticationDetails({
 			Username: username,
 			Password: password
 		});
-		const userData = {
+		const cognitoUser = new CognitoUser({
 			Username: username,
-			Pool: userPool
-		};
-		const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+			Pool: this.props.userPool
+		});
 		cognitoUser.authenticateUser(authenticationDetails, {
 			onSuccess: result => {
 				let idToken = result.getIdToken().getJwtToken();

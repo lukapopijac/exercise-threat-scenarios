@@ -1,7 +1,15 @@
 import React from 'react';
+import {CognitoUserPool, CognitoUser} from 'amazon-cognito-identity-js';
 import './App.css';
 import Login from '../Login/Login.js';
 import ThreatScenariosTable from '../ThreatScenariosTable/ThreatScenariosTable.js';
+
+const poolData = {
+	UserPoolId: 'us-west-2_9rkRbB2Vn',
+	ClientId: '7q73kj26651bkg4t3peu4v3m4q'
+};
+const userPool = new CognitoUserPool(poolData);
+
 
 export default class App extends React.Component {
 	constructor() {
@@ -12,6 +20,11 @@ export default class App extends React.Component {
 	}
 
 	_logout() {
+		const cognitoUser = new CognitoUser({
+			Username: localStorage.getItem('username'),
+			Pool: userPool
+		});
+		cognitoUser.signOut();
 		localStorage.clear();
 		this.forceUpdate();
 	}
@@ -35,7 +48,7 @@ export default class App extends React.Component {
 						<ThreatScenariosTable/>
 					</div>
 					:
-					<Login onSuccess={_ => this.forceUpdate()} />
+					<Login userPool={userPool} onSuccess={_ => this.forceUpdate()} />
 				}
 				{[...this.props.modals]}
 			</div>
