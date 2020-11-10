@@ -1,6 +1,3 @@
-// import timeout from './timeout.js';
-
-// const url = new URL(document.URL).origin + '/api/';
 const urlThreatScenario = 'api/threat-scenarios';
 
 export async function getThreatScenarios() {
@@ -32,8 +29,8 @@ export async function updateThreatScenario(ts) {
 	return {};
 }
 
-export async function deleteThreatScenario(tsId) {
-	let res = await fetch(urlThreatScenario + '/' + tsId, {
+export async function deleteThreatScenario(id) {
+	let res = await fetch(urlThreatScenario + '/' + id, {
 		method: 'DELETE',
 		headers: {'Content-Type': 'application/json'}
 	}).catch(err => ({}));
