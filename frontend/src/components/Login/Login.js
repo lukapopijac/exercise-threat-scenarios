@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
-// const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+import openModal from '../../common/open-modal.js';
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -20,39 +21,31 @@ export default class Login extends React.Component {
 		let formData = new FormData(this.form.current);
 		let {username, password} = Object.fromEntries(formData);
 
-		console.log(username, password);
-
-		if(username=='aaa') {
-			localStorage.setItem('jwt', 'bla');
-			localStorage.setItem('username', username);
-			this.props.onSuccess();
-		}
-
-		// const poolData = {
-		// 	UserPoolId: 'us-west-2_9rkRbB2Vn',
-		// 	ClientId: '7q73kj26651bkg4t3peu4v3m4q'
-		// };
-		// const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-		// const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-		// 	Username: username,
-		// 	Password: password
-		// });
-		// const userData = {
-		// 	Username: username,
-		// 	Pool: userPool
-		// };
-		// const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-		// cognitoUser.authenticateUser(authenticationDetails, {
-		// 	onSuccess: result => {
-		// 		let idToken = result.getIdToken().getJwtToken();
-		// 		localStorage.setItem('jwt', idToken);
-		// 		localStorage.setItem('username', username);
-		// 		this.props.onSuccess();
-		// 	},
-		// 	onFailure: err => {
-		// 		console.log(err);
-		// 	},
-		// })
+		const poolData = {
+			UserPoolId: 'us-west-2_9rkRbB2Vn',
+			ClientId: '7q73kj26651bkg4t3peu4v3m4q'
+		};
+		const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+		const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+			Username: username,
+			Password: password
+		});
+		const userData = {
+			Username: username,
+			Pool: userPool
+		};
+		const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+		cognitoUser.authenticateUser(authenticationDetails, {
+			onSuccess: result => {
+				let idToken = result.getIdToken().getJwtToken();
+				localStorage.setItem('jwt', idToken);
+				localStorage.setItem('username', username);
+				this.props.onSuccess();
+			},
+			onFailure: err => {
+				openModal('Error', err.message);
+			},
+		})
 	}
 
 	render() {
