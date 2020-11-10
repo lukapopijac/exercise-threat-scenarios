@@ -16,7 +16,7 @@
 .ThreatScenariosTable .header {
 	padding: 0 10px;
 	display: grid;
-	grid-template-columns: 1fr 1.7fr 1fr 1fr 70px 70px 70px 80px;
+	grid-template-columns: 1fr 1.3fr 1fr 1fr 70px 70px 95px 80px;
 	gap: 10px;
 	grid-gap: 10px;  /* for safari */
 	align-items: center;
@@ -28,7 +28,7 @@
 .ThreatScenariosTable .header .classification { justify-self: start; }
 .ThreatScenariosTable .header .impact         { justify-self: center; }
 .ThreatScenariosTable .header .likelihood     { justify-self: center; }
-.ThreatScenariosTable .header .risk_level     { justify-self: center; }
+.ThreatScenariosTable .header .risk_level     { justify-self: right; }
 .ThreatScenariosTable .header .edit-delete    { justify-self: end; display: flex }
 
 .ThreatScenariosTable ul.list {

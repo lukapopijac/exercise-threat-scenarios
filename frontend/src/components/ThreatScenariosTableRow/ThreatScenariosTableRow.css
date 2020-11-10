@@ -1,24 +1,24 @@
 .ThreatScenariosTableRow {
-	padding: 0 10px;
+	padding: 6px 10px;
 	display: grid;
-	grid-template-columns: 1fr 1.7fr 1fr 1fr 70px 70px 70px 80px;
+	grid-template-columns: 1fr 1.3fr 1fr 1fr 70px 70px 95px 80px;
 	gap: 10px;
 	grid-gap: 10px;  /* for safari */
 	align-items: center;
 }
 
 .ThreatScenariosTableRow {
-	height: 40px;
+	min-height: 40px;
 	border-bottom: 1px solid #ddd;
 }
 
-.ThreatScenariosTableRow .title          { justify-self: start; }
-.ThreatScenariosTableRow .description    { justify-self: start; }
-.ThreatScenariosTableRow .related_asset  { justify-self: start; }
-.ThreatScenariosTableRow .classification { justify-self: start; }
+.ThreatScenariosTableRow .title          { justify-self: start; overflow-wrap: break-word; }
+.ThreatScenariosTableRow .description    { justify-self: start; overflow-wrap: break-word; }
+.ThreatScenariosTableRow .related_asset  { justify-self: start; overflow-wrap: break-word; }
+.ThreatScenariosTableRow .classification { justify-self: start; overflow-wrap: break-word; }
 .ThreatScenariosTableRow .impact         { justify-self: center; }
 .ThreatScenariosTableRow .likelihood     { justify-self: center; }
-.ThreatScenariosTableRow .risk_level     { justify-self: center; }
+.ThreatScenariosTableRow .risk_level     { justify-self: right; }
 .ThreatScenariosTableRow .actions    { justify-self: end; display: flex }
 
 .ThreatScenariosTableRow .impact     input { text-align: center; }
