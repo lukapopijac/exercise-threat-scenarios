@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "build": "rollup -c --environment NODE_ENV:production"
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "Luka",
   "devDependencies": {
