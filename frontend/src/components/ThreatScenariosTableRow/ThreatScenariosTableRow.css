@@ -11,15 +11,6 @@
 	height: 40px;
 	border-bottom: 1px solid #ddd;
 }
-.ThreatScenariosTableRow.edit {
-	border: 1px solid black;
-}
-
-.ThreatScenariosTableRow.edit input {
-	padding: 0;
-	width: 100%;
-	height: 30px;
-}
 
 .ThreatScenariosTableRow .title          { justify-self: start; }
 .ThreatScenariosTableRow .description    { justify-self: start; }
@@ -28,12 +19,12 @@
 .ThreatScenariosTableRow .impact         { justify-self: center; }
 .ThreatScenariosTableRow .likelihood     { justify-self: center; }
 .ThreatScenariosTableRow .risk_level     { justify-self: center; }
-.ThreatScenariosTableRow .edit-delete    { justify-self: end; display: flex }
+.ThreatScenariosTableRow .actions    { justify-self: end; display: flex }
 
 .ThreatScenariosTableRow .impact     input { text-align: center; }
 .ThreatScenariosTableRow .likelihood input { text-align: center; }
 
-.ThreatScenariosTableRow .edit-delete button {
+.ThreatScenariosTableRow .actions button {
 	outline: none;
 	background: transparent;
 	border: none;
@@ -43,14 +34,14 @@
 	height: 25px;
 	padding: 0;
 }
-.ThreatScenariosTableRow .edit-delete button.btn-edit i {
+.ThreatScenariosTableRow .actions button.btn-edit i {
 	color: #211;
 	font-size: 20px;
 }
-.ThreatScenariosTableRow .edit-delete button.btn-delete i {
+.ThreatScenariosTableRow .actions button.btn-delete i {
 	color: #b22;
 	font-size: 20px;
 }
-.ThreatScenariosTableRow .edit-delete button:hover {
+.ThreatScenariosTableRow .actions button:hover {
 	background: #e2e2e2;
 }

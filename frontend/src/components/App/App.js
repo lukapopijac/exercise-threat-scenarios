@@ -15,6 +15,7 @@ export default class App extends React.Component {
 				<div className="table-wrapper">
 					<ThreatScenariosTable/>
 				</div>
+				{[...this.props.modals]}
 			</div>
 		);
 	}

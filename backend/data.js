@@ -6,8 +6,8 @@ export default [
 		related_asset: 'asset1', 
 		classification: 'class1', 
 		impact: 3, 
-		likelihood: 4, 
-		risk_level: 3
+		likelihood: 2, 
+		risk_level: 2
 	},
 	{
 		id: 32, 

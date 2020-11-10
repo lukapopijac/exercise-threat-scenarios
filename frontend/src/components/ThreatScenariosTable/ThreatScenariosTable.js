@@ -2,15 +2,17 @@ import React from 'react';
 import './ThreatScenariosTable.css';
 
 import ThreatScenariosTableRow from '../ThreatScenariosTableRow/ThreatScenariosTableRow.js';
-import { getThreatScenarios, insertThreatScenario, updateThreatScenario, deleteThreatScenario } from '../../common/server-api.js';
+import { getThreatScenarios, deleteThreatScenario } from '../../common/server-api.js';
 
+import openModal from '../../common/open-modal.js';
+import AddUpdateThreatScenarioForm from '../AddUpdateThreatScenarioForm/AddUpdateThreatScenarioForm.js';
 
 export default class ThreatScenariosTable extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			scenarios: [],
-			page: null,
+			page: 0,
 			rowsPerPage: 5,
 			mode: null,   // null, 'edit', 'insert'
 			editId: null
@@ -19,46 +21,45 @@ export default class ThreatScenariosTable extends React.Component {
 		this._goPageDown = this._goPageDown.bind(this);
 		this._goPageUp = this._goPageUp.bind(this);
 
-		this._cancelEdit = this._cancelEdit.bind(this);
-		this._confirmEdit = this._confirmEdit.bind(this);
+		this._refreshAllData = this._refreshAllData.bind(this);
+		
+		this._addEditThreatScenario = this._addEditThreatScenario.bind(this);
+		this._deleteThreatScenario = this._deleteThreatScenario.bind(this);
+	}
+
+	async _refreshAllData() {
+		let result = await getThreatScenarios();
+		if(result.error) openModal('Error', result.errorMessage);
+		else {
+			this.setState({
+				scenarios: result,
+				page: 0
+			});
+		}
 	}
 
 	async componentDidMount() {
-		let threatScenarios = await getThreatScenarios();
-		this.setState({
-			scenarios: threatScenarios,
-			page: 0
-		});	
-		console.log(threatScenarios);
+		this._refreshAllData();
 	}
 
-	_deleteThreatScenario(tsId) {
-		deleteThreatScenario(tsId);
+	async _deleteThreatScenario(tsId) {
+		let result = await deleteThreatScenario(tsId);
+		if(result.error) openModal('Error', result.errorMessage);
+		else this._refreshAllData();
 	}
 
-	_editThreatScenario(ts) {
-		console.log('edit', ts);
-		this.setState({
-			mode: 'edit',
-			editId: ts.id
-		})
+	_addEditThreatScenario(ts) {
+		let closeModal = openModal(ts ? 'Edit Threat Scenario' : 'Add New Threat Scenario',
+			<AddUpdateThreatScenarioForm
+				record={ts} 
+				onSuccess={_ => {
+					closeModal();
+					this._refreshAllData();
+				}}
+			/>
+		);
 	}
 	
-	_updateThreatScenario() {
-
-	}
-
-	_cancelEdit() {
-		this.setState({
-			mode: null,
-			editId: null
-		})
-	}
-
-	_confirmEdit(ts) {
-		console.log('confirm', ts)
-	}
-
 	_goPageDown() {
 		if(this.state.page > 0) this.setState({page: this.state.page-1});
 	}
@@ -73,9 +74,7 @@ export default class ThreatScenariosTable extends React.Component {
 
 	render() {
 		let {page, rowsPerPage, scenarios, mode, editId} = this.state;
-		let totaPages = Math.ceil(scenarios.length / rowsPerPage);
-		console.log('total:', totaPages);
-		let rowFrom = page*rowsPerPage + 1;
+		let rowFrom = Math.min(page*rowsPerPage + 1, scenarios.length);
 		let rowTo = Math.min((page+1)*rowsPerPage, scenarios.length);
 
 		let visibleRows = scenarios.slice(rowFrom-1, rowTo);
@@ -97,17 +96,18 @@ export default class ThreatScenariosTable extends React.Component {
 							key={ts.id} 
 							threatScenario={ts} 
 							mode={mode=='edit' && editId==ts.id ? 'edit' : null}
-							onEditClick={_ => this._editThreatScenario(ts)}
+							onEditClick={_ => this._addEditThreatScenario(ts)}
 							onDeleteClick={_ => this._deleteThreatScenario(ts.id)}
-							onConfirmClick={this._confirmEdit}
-							onCancelClick={this._cancelEdit}
 						/>
 					)}
 				</ul>
 				<div className="footer">
-					<div className="pages">{rowFrom} - {rowTo} of {scenarios.length}</div>
-					<button disabled={page==0}                 onClick={this._goPageDown}>❮</button>
-					<button disabled={page==this.totalPages-1} onClick={this._goPageUp}  >❯</button>
+					<button type="button" className="btn-add" onClick={_ => this._addEditThreatScenario()}>Add</button>
+					<div className="pagination">
+						<div className="pages">{rowFrom} - {rowTo} of {scenarios.length}</div>
+						<button disabled={page==0}                 onClick={this._goPageDown}>❮</button>
+						<button disabled={page==this.totalPages-1} onClick={this._goPageUp}  >❯</button>
+					</div>
 				</div>
 			</div>
 		);

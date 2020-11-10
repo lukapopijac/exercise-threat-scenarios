@@ -1,0 +1,51 @@
+.AddUpdateThreatScenarioForm {
+}
+
+.AddUpdateThreatScenarioForm label {
+	display: block;
+	margin-bottom: 14px;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+.AddUpdateThreatScenarioForm label.for-select {
+	width: 130px;
+    display: flex;
+    align-items: center;
+	justify-content: space-between;
+}
+
+
+.AddUpdateThreatScenarioForm input {
+	width: 400px;
+	height: 30px;
+}
+
+.AddUpdateThreatScenarioForm select {
+	width: 50px;
+	height: 30px;
+}
+
+
+
+.AddUpdateThreatScenarioForm .buttons {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.AddUpdateThreatScenarioForm button {
+	border: none;
+	background: #d5d5d5;
+	/* width: 32px; */
+	padding: 10px 20px;
+	font-size: 16px;
+	/* outline: none; */
+	cursor: pointer;
+}
+
+.AddUpdateThreatScenarioForm button:hover {
+	background: #eee;
+}
+.AddUpdateThreatScenarioForm button:active {
+	background: #e2e2e2;
+}
