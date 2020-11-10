@@ -5,9 +5,32 @@
 	padding: 30px;
 	display: flex;
 	align-items: center;
-	font-weight: bold;
-	font-size: 20px;
+	justify-content: space-between;
 }
+
+.App-header h1 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.App-usercorner button {
+	margin-left: 15px;
+	border: none;
+	background: #d5d5d5;
+	padding: 6px 12px;
+	font-size: 12px;
+	cursor: pointer;
+	outline: none;
+}
+
+.App-usercorner button:hover {
+	background: #eee;
+}
+.App-usercorner button:active {
+	background: #e2e2e2;
+}
+
+
 
 .App .table-wrapper {
 	background: #f8f8f8;
